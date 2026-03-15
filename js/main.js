@@ -69,8 +69,11 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     btn.addEventListener('click', toggleMuteAll);
   });
 
-  function getCardWidth() {
-    return cards[0].getBoundingClientRect().width + GAP;
+  function getCenterOffset(index) {
+    const cardWidth = cards[0].getBoundingClientRect().width;
+    const outerWidth = outer.getBoundingClientRect().width;
+    const offsetToCenter = (outerWidth - cardWidth) / 2;
+    return (index * (cardWidth + GAP)) - offsetToCenter;
   }
 
   function goTo(index) {
@@ -81,7 +84,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     } else {
       current = index;
     }
-    const offset = current * getCardWidth();
+    const offset = getCenterOffset(current);
     track.style.transform = `translateX(-${offset}px)`;
     dots.forEach((d, i) => d.classList.toggle('active', i === current));
     updateVideos();
@@ -98,26 +101,26 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   outer.addEventListener('mousedown', e => {
     isDragging   = true;
     startX       = e.clientX;
-    startOffset  = current * getCardWidth();
+    startOffset  = getCenterOffset(current);
     track.style.transition = 'none';
   });
 
   window.addEventListener('mousemove', e => {
     if (!isDragging) return;
     const delta = startX - e.clientX;
-    track.style.transform = `translateX(-${Math.max(0, startOffset + delta)}px)`;
+    track.style.transform = `translateX(-${startOffset + delta}px)`;
   });
 
   /* Swipe táctil */
   outer.addEventListener('touchstart', e => {
     startX      = e.touches[0].clientX;
-    startOffset = current * getCardWidth();
+    startOffset = getCenterOffset(current);
     track.style.transition = 'none';
   }, { passive: true });
 
   outer.addEventListener('touchmove', e => {
     const delta = startX - e.touches[0].clientX;
-    track.style.transform = `translateX(-${Math.max(0, startOffset + delta)}px)`;
+    track.style.transform = `translateX(-${startOffset + delta}px)`;
   }, { passive: true });
 
   /* Soltar (ratón y touch) */
@@ -134,4 +137,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
   window.addEventListener('mouseup',  e => { if (isDragging) endDrag(e.clientX); });
   outer.addEventListener('touchend',  e => endDrag(e.changedTouches[0].clientX));
+
+  // Initialize view
+  setTimeout(() => goTo(0), 100);
 })();
