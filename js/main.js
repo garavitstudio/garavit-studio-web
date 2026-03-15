@@ -19,125 +19,99 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
   });
 });
 
-/* ─── SLIDER REELS ────────────────────────────── */
+/* ─── VIDEO CAROUSEL ──────────────────────────── */
 (function () {
-  const track   = document.getElementById('reelsTrack');
-  const outer   = document.getElementById('reelsOuter');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const dots    = document.querySelectorAll('.slider-dot');
-  const cards   = track ? track.querySelectorAll('.reel-card') : [];
-  const total   = cards.length;
 
-  if (!track || total === 0) return;
+  // Datos de los videos
+  var videos = [
+    { src: 'videos/Cejas2%20F.mp4',       tag: 'Peluquería', title: 'El secreto de un corte que dura meses' },
+    { src: 'videos/Linaje%20F.mp4',        tag: 'Estética',   title: 'Lo que nadie te cuenta del cuidado de uñas' },
+    { src: 'videos/laser%20globo%20F.mp4', tag: 'Fitness',    title: 'Por qué tus clientes no vuelven al gym' }
+  ];
 
-  let current = 0;
-  const GAP   = 28;
-  let isMuted = true;
+  var current = 0;
+  var isMuted = true;
 
-  function updateVideos() {
-    cards.forEach((card, i) => {
-      const video = card.querySelector('video');
-      const muteIcon = card.querySelector('.icon-mute');
-      const unmuteIcon = card.querySelector('.icon-unmute');
-      
-      if (!video) return;
-      
-      video.muted = isMuted;
-      if (muteIcon && unmuteIcon) {
-        muteIcon.style.display = isMuted ? 'block' : 'none';
-        unmuteIcon.style.display = isMuted ? 'none' : 'block';
-      }
+  var vcVideo   = document.getElementById('vcVideo');
+  var vcTag     = document.getElementById('vcTag');
+  var vcTitle   = document.getElementById('vcTitle');
+  var vcPhone   = document.getElementById('vcPhone');
+  var vcSound   = document.getElementById('vcSound');
+  var icoMute   = document.getElementById('icoMute');
+  var icoUnmute = document.getElementById('icoUnmute');
+  var vcPrev    = document.getElementById('vcPrev');
+  var vcNext    = document.getElementById('vcNext');
+  var vcDots    = document.querySelectorAll('.vc-dot');
 
-      if (i === current) {
-        video.play().catch(e => console.log('Autoplay prevented:', e));
-      } else {
-        video.pause();
-        video.currentTime = 0;
-      }
-    });
-  }
+  if (!vcVideo) return; // Salir si no existe el elemento
 
-  function toggleMuteAll(e) {
-    e.stopPropagation(); // Evitar click en la tarjeta o arrastre
-    isMuted = !isMuted;
-    updateVideos();
-  }
+  function loadVideo(index) {
+    // Fade out
+    vcPhone.style.opacity = '0';
 
-  // Bind audio toggles
-  document.querySelectorAll('.reel-sound-toggle').forEach(btn => {
-    btn.addEventListener('click', toggleMuteAll);
-  });
+    setTimeout(function() {
+      var v = videos[index];
 
-  function getCenterOffset(index) {
-    const cardWidth = cards[0].getBoundingClientRect().width;
-    const outerWidth = outer.getBoundingClientRect().width;
-    const offsetToCenter = (outerWidth - cardWidth) / 2;
-    return (index * (cardWidth + GAP)) - offsetToCenter;
+      // Actualizar src, tag y título
+      vcVideo.src   = v.src;
+      vcVideo.muted = isMuted;
+      vcTag.textContent   = v.tag;
+      vcTitle.textContent = v.title;
+
+      // Actualizar dots
+      vcDots.forEach(function(d, i) {
+        d.classList.toggle('active', i === index);
+      });
+
+      // Reproducir
+      vcVideo.load();
+      vcVideo.play().catch(function() {});
+
+      // Fade in
+      vcPhone.style.opacity = '1';
+    }, 250);
   }
 
   function goTo(index) {
-    if (index >= total) {
-      current = 0;
-    } else if (index < 0) {
-      current = total - 1;
-    } else {
-      current = index;
-    }
-    const offset = getCenterOffset(current);
-    track.style.transform = `translateX(-${offset}px)`;
-    dots.forEach((d, i) => d.classList.toggle('active', i === current));
-    updateVideos();
+    if (index < 0) index = videos.length - 1;
+    if (index >= videos.length) index = 0;
+    current = index;
+    loadVideo(current);
   }
 
-  /* Botones */
-  prevBtn.addEventListener('click', () => goTo(current - 1));
-  nextBtn.addEventListener('click', () => goTo(current + 1));
-  dots.forEach(d => d.addEventListener('click', () => goTo(+d.dataset.index)));
-
-  /* Drag con ratón */
-  let startX = 0, isDragging = false, startOffset = 0;
-
-  outer.addEventListener('mousedown', e => {
-    isDragging   = true;
-    startX       = e.clientX;
-    startOffset  = getCenterOffset(current);
-    track.style.transition = 'none';
+  // Botón de sonido
+  vcSound.addEventListener('click', function() {
+    isMuted = !isMuted;
+    vcVideo.muted = isMuted;
+    icoMute.style.display   = isMuted ? 'block' : 'none';
+    icoUnmute.style.display = isMuted ? 'none'  : 'block';
   });
 
-  window.addEventListener('mousemove', e => {
-    if (!isDragging) return;
-    const delta = startX - e.clientX;
-    track.style.transform = `translateX(-${startOffset + delta}px)`;
+  // Flechas
+  vcPrev.addEventListener('click', function() { goTo(current - 1); });
+  vcNext.addEventListener('click', function() { goTo(current + 1); });
+
+  // Dots
+  vcDots.forEach(function(dot) {
+    dot.addEventListener('click', function() {
+      goTo(parseInt(dot.getAttribute('data-i')));
+    });
   });
 
-  /* Swipe táctil */
-  outer.addEventListener('touchstart', e => {
-    startX      = e.touches[0].clientX;
-    startOffset = getCenterOffset(current);
-    track.style.transition = 'none';
+  // Swipe táctil
+  var touchStartX = 0;
+  vcPhone.addEventListener('touchstart', function(e) {
+    touchStartX = e.touches[0].clientX;
   }, { passive: true });
-
-  outer.addEventListener('touchmove', e => {
-    const delta = startX - e.touches[0].clientX;
-    track.style.transform = `translateX(-${startOffset + delta}px)`;
-  }, { passive: true });
-
-  /* Soltar (ratón y touch) */
-  function endDrag(endX) {
-    track.style.transition = '';
-    const delta = startX - endX;
-    if (Math.abs(delta) > 60) {
+  vcPhone.addEventListener('touchend', function(e) {
+    var delta = touchStartX - e.changedTouches[0].clientX;
+    if (Math.abs(delta) > 50) {
       goTo(delta > 0 ? current + 1 : current - 1);
-    } else {
-      goTo(current);
     }
-    isDragging = false;
-  }
+  });
 
-  window.addEventListener('mouseup',  e => { if (isDragging) endDrag(e.clientX); });
-  outer.addEventListener('touchend',  e => endDrag(e.changedTouches[0].clientX));
+  // Iniciar con el primer video
+  vcVideo.muted = true;
+  vcVideo.play().catch(function() {});
 
-  // Initialize view
-  setTimeout(() => goTo(0), 100);
 })();

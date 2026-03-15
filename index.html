@@ -146,126 +146,66 @@
       </p>
     </div>
 
-    <!-- SLIDER -->
-    <div class="reels-slider-wrap reveal">
-      <div class="reels-track-outer" id="reelsOuter">
-        <div class="reels-track" id="reelsTrack">
+    <!-- CAROUSEL DE VIDEOS -->
+    <div class="vc-wrap reveal">
 
-          <!-- REEL 1 -->
-          <div class="reel-card">
-            <div class="reel-phone">
-              <video src="videos/Cejas2%20F.mp4" loop muted playsinline></video>
-              <div class="reel-sound-toggle">
-                <svg class="icon-mute" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-                  <line x1="23" y1="9" x2="17" y2="15"></line>
-                  <line x1="17" y1="9" x2="23" y2="15"></line>
-                </svg>
-                <svg class="icon-unmute" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
-                  <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                </svg>
-              </div>
-              <div class="reel-tag">Peluquería</div>
+      <!-- Flecha izquierda -->
+      <button class="vc-arrow vc-prev" id="vcPrev" aria-label="Anterior">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M13 4L7 10L13 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
 
-              <div class="reel-overlay">
-                <p class="reel-client">Estudio Valeria</p>
-                <p class="reel-title">El secreto de un corte que dura meses</p>
-              </div>
-            </div>
-            <div class="reel-meta">
-              <div class="reel-meta-dot"></div>
-              <span>128K reproducciones · Peluquería</span>
-            </div>
-          </div>
+      <!-- Teléfono visible -->
+      <div class="vc-phone" id="vcPhone">
+        <video id="vcVideo" src="videos/Cejas2%20F.mp4" loop muted playsinline></video>
 
-          <!-- REEL 2 -->
-          <div class="reel-card">
-            <div class="reel-phone">
-              <video src="videos/Linaje%20F.mp4" loop muted playsinline></video>
-              <div class="reel-sound-toggle">
-                <svg class="icon-mute" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-                  <line x1="23" y1="9" x2="17" y2="15"></line>
-                  <line x1="17" y1="9" x2="23" y2="15"></line>
-                </svg>
-                <svg class="icon-unmute" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
-                  <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                </svg>
-              </div>
-              <div class="reel-tag">Estética</div>
+        <!-- Botón de sonido -->
+        <button class="vc-sound" id="vcSound" aria-label="Activar sonido">
+          <!-- Icono MUDO (por defecto) -->
+          <svg id="icoMute" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <line x1="23" y1="9" x2="17" y2="15"></line>
+            <line x1="17" y1="9" x2="23" y2="15"></line>
+          </svg>
+          <!-- Icono CON SONIDO (oculto) -->
+          <svg id="icoUnmute" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:none">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon>
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07"></path>
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14"></path>
+          </svg>
+        </button>
 
-              <div class="reel-overlay">
-                <p class="reel-client">Centro Lumina</p>
-                <p class="reel-title">Lo que nadie te cuenta del cuidado de uñas</p>
-              </div>
-            </div>
-            <div class="reel-meta">
-              <div class="reel-meta-dot"></div>
-              <span>312K reproducciones · Estética</span>
-            </div>
-          </div>
-
-          <!-- REEL 3 -->
-          <div class="reel-card">
-            <div class="reel-phone">
-              <video src="videos/laser%20globo%20F.mp4" loop muted playsinline></video>
-              <div class="reel-sound-toggle">
-                <svg class="icon-mute" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-                  <line x1="23" y1="9" x2="17" y2="15"></line>
-                  <line x1="17" y1="9" x2="23" y2="15"></line>
-                </svg>
-                <svg class="icon-unmute" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;">
-                  <path d="M11 5L6 9H2v6h4l5 4V5z"></path>
-                  <path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path>
-                </svg>
-              </div>
-              <div class="reel-tag">Fitness</div>
-
-              <div class="reel-overlay">
-                <p class="reel-client">Trainer Marc</p>
-                <p class="reel-title">Por qué tus clientes no vuelven al gym</p>
-              </div>
-            </div>
-            <div class="reel-meta">
-              <div class="reel-meta-dot"></div>
-              <span>487K reproducciones · Fitness</span>
-            </div>
-          </div>
-
-        </div><!-- /reelsTrack -->
-      </div><!-- /reelsOuter -->
-
-      <!-- Controles slider -->
-      <div class="slider-nav">
-        <div class="slider-dots" id="sliderDots">
-          <div class="slider-dot active" data-index="0"></div>
-          <div class="slider-dot"        data-index="1"></div>
-          <div class="slider-dot"        data-index="2"></div>
-        </div>
-        <div class="slider-arrows">
-          <button class="slider-arrow" id="prevBtn" aria-label="Anterior">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M11 4L6 9L11 14"
-                stroke="currentColor" stroke-width="1.5"
-                stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
-          <button class="slider-arrow" id="nextBtn" aria-label="Siguiente">
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-              <path d="M7 4L12 9L7 14"
-                stroke="currentColor" stroke-width="1.5"
-                stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-          </button>
+        <!-- Info overlay -->
+        <div class="vc-overlay">
+          <span class="vc-tag" id="vcTag">Peluquería</span>
+          <p class="vc-title" id="vcTitle">El secreto de un corte que dura meses</p>
         </div>
       </div>
 
-    </div><!-- /reels-slider-wrap -->
+      <!-- Flecha derecha -->
+      <button class="vc-arrow vc-next" id="vcNext" aria-label="Siguiente">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+          <path d="M7 4L13 10L7 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+
+    </div><!-- /vc-wrap -->
+
+    <!-- Puntos indicadores -->
+    <div class="vc-dots">
+      <div class="vc-dot active" data-i="0"></div>
+      <div class="vc-dot" data-i="1"></div>
+      <div class="vc-dot" data-i="2"></div>
+    </div>
+
   </div>
 </section>
+
+
+
+
+
 
 <!-- ═══════════════════════════════════════════════
      DIFERENCIAL
