@@ -1,0 +1,6 @@
+# Excluir ejecutable de Antigravity
+Antigravity.exe
+
+# Carpetas del sistema
+.gemini/
+node_modules/

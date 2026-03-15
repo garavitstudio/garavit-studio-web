@@ -1,0 +1,11 @@
+Para que los videos se reproduzcan en la sección "Trabajos realizados":
+
+1. Coloca tus archivos de video (ej. "video1.mp4", "video2.mp4") en esta carpeta `videos`.
+2. Abre el archivo `index.html`.
+3. Busca la sección `<!-- REEL 1 -->` (línea ~155).
+4. Dentro del div `class="reel-phone"`, verás un bloque con `style="background:linear-gradient..."`.
+5. Reemplaza ese div completo por tu etiqueta de video, por ejemplo:
+   <video src="videos/video1.mp4" autoplay loop muted playsinline></video>
+6. Repite el proceso para `<!-- REEL 2 -->` y `<!-- REEL 3 -->`.
+
+Los videos se verán centrados automáticamente gracias a los estilos que acabamos de agregar.
