@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /aviso-legal.html
+Disallow: /politica-privacidad.html
+Disallow: /politica-cookies.html
+
+Sitemap: https://garavit-studio-master.vercel.app/sitemap.xml
