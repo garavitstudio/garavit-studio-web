@@ -4,3 +4,5 @@ Antigravity.exe
 # Carpetas del sistema
 .gemini/
 node_modules/
+
+.vercel
