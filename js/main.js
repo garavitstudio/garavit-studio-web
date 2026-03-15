@@ -33,6 +33,41 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
   let current = 0;
   const GAP   = 28;
+  let isMuted = true;
+
+  function updateVideos() {
+    cards.forEach((card, i) => {
+      const video = card.querySelector('video');
+      const muteIcon = card.querySelector('.icon-mute');
+      const unmuteIcon = card.querySelector('.icon-unmute');
+      
+      if (!video) return;
+      
+      video.muted = isMuted;
+      if (muteIcon && unmuteIcon) {
+        muteIcon.style.display = isMuted ? 'block' : 'none';
+        unmuteIcon.style.display = isMuted ? 'none' : 'block';
+      }
+
+      if (i === current) {
+        video.play().catch(e => console.log('Autoplay prevented:', e));
+      } else {
+        video.pause();
+        video.currentTime = 0;
+      }
+    });
+  }
+
+  function toggleMuteAll(e) {
+    e.stopPropagation(); // Evitar click en la tarjeta o arrastre
+    isMuted = !isMuted;
+    updateVideos();
+  }
+
+  // Bind audio toggles
+  document.querySelectorAll('.reel-sound-toggle').forEach(btn => {
+    btn.addEventListener('click', toggleMuteAll);
+  });
 
   function getCardWidth() {
     return cards[0].getBoundingClientRect().width + GAP;
@@ -49,6 +84,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     const offset = current * getCardWidth();
     track.style.transform = `translateX(-${offset}px)`;
     dots.forEach((d, i) => d.classList.toggle('active', i === current));
+    updateVideos();
   }
 
   /* Botones */
