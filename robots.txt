@@ -3,5 +3,6 @@ Allow: /
 Disallow: /aviso-legal.html
 Disallow: /politica-privacidad.html
 Disallow: /politica-cookies.html
+Disallow: /web-antigua.html
 
-Sitemap: https://garavit-studio-master.vercel.app/sitemap.xml
+Sitemap: https://garavitstudio.com/sitemap.xml
