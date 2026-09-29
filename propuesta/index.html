@@ -1,0 +1,760 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <script>document.documentElement.classList.add('js');</script>
+
+  <title>Propuesta de vídeo de boda | Garavit Studio</title>
+  <meta name="description" content="Nuestra propuesta para grabar vuestra boda: tres planes, sin ningún compromiso.">
+  <!-- Página privada para un cliente: fuera de buscadores -->
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#222d39">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23222d39'/%3E%3Ctext x='32' y='45' text-anchor='middle' font-family='Georgia,serif' font-size='40' font-weight='700' fill='%23f0f0e8'%3EG%3C/text%3E%3Ccircle cx='50' cy='42' r='4' fill='%23e2b44c'/%3E%3C/svg%3E">
+
+  <!-- Vista previa al compartir el enlace (WhatsApp, Instagram…) -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://garavitstudio.com/propuesta/">
+  <meta property="og:title" content="Vuestra boda, en película · Garavit Studio">
+  <meta property="og:description" content="Nuestra propuesta para grabar vuestra boda. Sin ningún compromiso.">
+  <meta property="og:image" content="https://garavitstudio.com/propuesta/img/og.jpg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="es_ES">
+  <meta property="og:site_name" content="Garavit Studio">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    /* ═══════════════════════════════════════════════
+       GARAVIT STUDIO — PRESENTACIÓN DE PRESUPUESTO
+       Mismos colores y tipografías que la web.
+       Rutas absolutas (/propuesta/…) para que funcione
+       tanto en /propuesta como en /propuesta/
+    ═══════════════════════════════════════════════ */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #222d39;
+      --navy-dark: #1a232e;
+      --navy-light: #2a3545;
+      --cream: #f0f0e8;
+      --gold: #e2b44c;
+      --gold-light: #f0cc78;
+      --gold-ink: #86620f;               /* dorado legible sobre crema */
+      --muted: rgba(240,240,232,0.62);
+      --rule: rgba(240,240,232,0.12);
+      --ease: cubic-bezier(0.23, 1, 0.32, 1);
+      --pad-x: clamp(20px, 6vw, 96px);
+    }
+
+    html {
+      background: var(--navy);
+      scroll-snap-type: y proximity;
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+    }
+    @media (min-width: 900px) and (min-height: 620px) and (orientation: landscape) {
+      html { scroll-snap-type: y mandatory; }
+    }
+
+    body {
+      background: var(--navy);
+      color: var(--cream);
+      font-family: 'Outfit', system-ui, sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { display: block; max-width: 100%; }
+    .sr-only {
+      position: absolute; width: 1px; height: 1px; overflow: hidden;
+      clip: rect(0 0 0 0); white-space: nowrap;
+    }
+
+    /* ─── BARRA SUPERIOR ──────────────────────────── */
+    .topbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 30;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: calc(20px + env(safe-area-inset-top)) var(--pad-x) 20px;
+      pointer-events: none;
+    }
+    .logo, .counter { transition: color 0.35s, text-shadow 0.35s; color: var(--cream); }
+    .logo {
+      pointer-events: auto;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px; font-weight: 600; letter-spacing: 0.06em;
+      text-decoration: none;
+    }
+    .logo span { color: var(--gold); transition: color 0.35s; }
+    .counter {
+      font-size: 12px; font-weight: 500; letter-spacing: 0.2em;
+      font-variant-numeric: tabular-nums;
+    }
+    .topbar [data-on="photo"] { color: #fff; text-shadow: 0 1px 14px rgba(0,0,0,0.45); }
+    .topbar [data-on="light"] { color: var(--navy); text-shadow: none; }
+    .topbar [data-on="light"] span { color: var(--gold-ink); }
+
+    /* ─── DIAPOSITIVAS ────────────────────────────── */
+    .slide {
+      position: relative;
+      min-height: 100vh;
+      min-height: 100svh;
+      scroll-snap-align: start;
+      display: flex; align-items: center;
+      overflow: hidden;
+    }
+    .wrap {
+      position: relative; z-index: 2;
+      width: 100%; max-width: 1200px; margin: 0 auto;
+      padding: clamp(96px, 14vh, 140px) var(--pad-x) clamp(64px, 10vh, 110px);
+    }
+
+    .eyebrow {
+      display: flex; align-items: center; gap: 12px;
+      font-size: 12px; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+      margin-bottom: 22px;
+    }
+    .eyebrow .line { width: 36px; height: 1px; background: currentColor; flex: none; }
+
+    h1, h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 600; line-height: 1.04; letter-spacing: -0.01em;
+    }
+    h1 em, h2 em { font-style: italic; font-weight: 500; color: var(--gold-light); }
+    h2 { font-size: clamp(38px, 4.6vw, 72px); }
+
+    /* Líneas verticales decorativas, como en la home */
+    .lines { position: absolute; inset: 0; pointer-events: none; }
+    .lines i {
+      position: absolute; top: 0; bottom: 0; width: 1px;
+      background: linear-gradient(to bottom, transparent, rgba(226,180,76,0.08), transparent);
+    }
+    .lines i:nth-child(1) { left: 18%; }
+    .lines i:nth-child(2) { left: 50%; }
+    .lines i:nth-child(3) { left: 82%; }
+
+    /* ─── APARICIONES ─────────────────────────────── */
+    .js .rv {
+      opacity: 0; transform: translateY(26px);
+      transition: opacity 0.9s var(--ease), transform 0.9s var(--ease);
+      transition-delay: calc(var(--d, 0) * 0.12s + 0.1s);
+    }
+    .js .is-in .rv { opacity: 1; transform: none; }
+
+    /* ═══ 1 · PORTADA ═══════════════════════════════ */
+    .photo-bg { position: absolute; inset: 0; margin: 0; }
+    .photo-bg img { width: 100%; height: 100%; object-fit: cover; }
+
+    .cover .photo-bg img { object-position: 50% 35%; }
+    .js .cover .photo-bg img { animation: kenburns 16s var(--ease) both; }
+    @keyframes kenburns {
+      from { transform: scale(1.08); }
+      to   { transform: scale(1); }
+    }
+    .cover .shade {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(26,35,46,0.35) 0%, rgba(26,35,46,0) 18%),
+        linear-gradient(90deg, rgba(26,35,46,0.66) 0%, rgba(26,35,46,0.3) 36%, rgba(26,35,46,0) 58%),
+        linear-gradient(0deg, rgba(26,35,46,0.4) 0%, rgba(26,35,46,0) 26%);
+    }
+    .cover__content {
+      position: relative; z-index: 2;
+      align-self: flex-start;
+      margin-top: clamp(110px, 20vh, 220px);
+      padding: 0 var(--pad-x);
+      max-width: 780px;
+    }
+    .cover .eyebrow { color: var(--gold-light); }
+    .cover h1 {
+      font-size: clamp(48px, 6.6vw, 108px);
+      text-shadow: 0 2px 30px rgba(0,0,0,0.25);
+    }
+    .cover__sub {
+      margin-top: 22px;
+      font-size: clamp(16px, 1.3vw, 19px);
+      color: rgba(255,255,255,0.88);
+      max-width: 420px;
+    }
+    .next-hint {
+      position: absolute; z-index: 3; left: 50%; bottom: calc(26px + env(safe-area-inset-bottom));
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 6px;
+      background: none; border: 0; cursor: pointer;
+      color: #fff; font: 500 11px/1 'Outfit', sans-serif;
+      letter-spacing: 0.24em; text-transform: uppercase;
+      opacity: 0.9;
+    }
+    .next-hint svg { animation: bob 2.2s ease-in-out infinite; }
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(6px); }
+    }
+
+    @media (orientation: portrait) {
+      .cover { align-items: flex-end; }
+      .cover .photo-bg img { object-position: 55% 50%; }
+      .cover .shade {
+        background:
+          linear-gradient(180deg, rgba(26,35,46,0.4) 0%, rgba(26,35,46,0) 16%),
+          linear-gradient(0deg, rgba(26,35,46,0.92) 0%, rgba(26,35,46,0.62) 26%, rgba(26,35,46,0) 52%);
+      }
+      .cover__content {
+        align-self: flex-end;
+        margin: 0 0 calc(92px + env(safe-area-inset-bottom));
+      }
+      .cover h1 { font-size: clamp(46px, 12vw, 84px); }
+    }
+
+    /* ═══ 2 · LOS TRES PRECIOS ═══════════════════════ */
+    .prices { background: radial-gradient(ellipse at 50% 110%, #2c3949 0%, var(--navy) 60%); }
+    .prices .wrap { text-align: center; }
+    .prices .eyebrow { justify-content: center; }
+    .price-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: clamp(14px, 2vw, 28px);
+      margin: clamp(40px, 7vh, 72px) auto 0;
+      max-width: 1000px;
+      align-items: center;
+    }
+    .price-card {
+      position: relative;
+      padding: clamp(28px, 4.4vh, 48px) clamp(20px, 2.4vw, 34px);
+      border: 1px solid var(--rule);
+      border-radius: 18px;
+      background: linear-gradient(160deg, rgba(42,53,69,0.92), rgba(27,36,47,0.92));
+    }
+    .price-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(28px, 2.5vw, 38px); font-weight: 600; letter-spacing: 0.01em;
+    }
+    .price { margin-top: 12px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .price s {
+      font-size: 15px; color: rgba(240,240,232,0.46);
+      text-decoration-thickness: 1px;
+    }
+    .price strong {
+      font-family: 'Cormorant Garamond', serif; font-weight: 600;
+      font-size: clamp(48px, 4.8vw, 72px); line-height: 1;
+      color: var(--gold-light);
+      font-variant-numeric: lining-nums;
+      white-space: nowrap;
+    }
+    .price-card--featured {
+      border-color: rgba(226,180,76,0.6);
+      background: linear-gradient(160deg, #334052, #1d2733);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.35);
+      padding-top: clamp(38px, 5.6vh, 60px);
+      padding-bottom: clamp(38px, 5.6vh, 60px);
+    }
+    .tag {
+      position: absolute; top: -13px; left: 50%;
+      transform: translateX(-50%);
+      background: var(--gold); color: var(--navy-dark);
+      font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase;
+      padding: 6px 14px; border-radius: 40px; white-space: nowrap;
+    }
+    .price-note {
+      margin-top: clamp(28px, 5vh, 44px);
+      font-size: 13px; letter-spacing: 0.06em; color: var(--muted);
+    }
+
+    /* Aparecen de uno en uno */
+    .js .price-card {
+      opacity: 0; transform: translateY(34px);
+      transition: opacity 1s var(--ease), transform 1s var(--ease);
+      transition-delay: calc(var(--i) * 0.7s + 0.35s);
+    }
+    .js .is-in .price-card { opacity: 1; transform: none; }
+    .js .tag, .js .price-note {
+      opacity: 0;
+      transition: opacity 0.8s var(--ease);
+      transition-delay: 2.5s;
+    }
+    .js .is-in .tag, .js .is-in .price-note { opacity: 1; }
+
+    @media (max-width: 760px) {
+      .price-grid { grid-template-columns: 1fr; gap: 16px; }
+      .price-card, .price-card--featured {
+        display: flex; align-items: center; justify-content: space-between;
+        text-align: left;
+        padding: 22px 22px;
+      }
+      .price { margin-top: 0; align-items: flex-end; }
+      .price strong { font-size: 44px; }
+      .price s { font-size: 14px; }
+      .tag { left: 22px; transform: none; top: -11px; font-size: 10px; }
+    }
+
+    /* ═══ 3 · SIN COMPROMISO ═══════════════════════ */
+    .calm { background: var(--cream); color: var(--navy); }
+    .split {
+      display: grid; grid-template-columns: 0.92fr 1.08fr;
+      width: 100%; min-height: 100vh; min-height: 100svh;
+    }
+    .split__photo { position: relative; margin: 0; overflow: hidden; }
+    .split__photo img {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      object-fit: cover; object-position: 50% 38%;
+    }
+    .split__photo::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(180deg, rgba(26,35,46,0.3) 0%, rgba(26,35,46,0) 16%);
+    }
+    .split__text {
+      display: flex; flex-direction: column; justify-content: center;
+      padding: clamp(96px, 13vh, 140px) var(--pad-x) clamp(56px, 9vh, 96px);
+      max-width: 720px;
+    }
+    .calm .eyebrow { color: var(--gold-ink); }
+    .calm h2 em { color: var(--gold-ink); }
+    .calm p {
+      margin-top: 18px; max-width: 520px;
+      font-size: clamp(16px, 1.25vw, 19px); line-height: 1.75;
+      color: rgba(34,45,57,0.8);
+    }
+    .calm h2 + p { margin-top: 26px; }
+    .gift {
+      margin-top: 34px; max-width: 540px;
+      display: flex; gap: 18px; align-items: flex-start;
+      padding: 24px 26px;
+      background: #fbf7ec;
+      border: 1px solid rgba(226,180,76,0.5);
+      border-radius: 16px;
+    }
+    .gift__icon {
+      flex: none; width: 46px; height: 46px; border-radius: 50%;
+      display: grid; place-items: center;
+      background: rgba(226,180,76,0.18); color: var(--gold-ink);
+    }
+    .gift h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(22px, 1.9vw, 27px); font-weight: 600; line-height: 1.2;
+    }
+    .gift p { margin-top: 6px; font-size: 15px; line-height: 1.65; }
+
+    @media (max-width: 899px), (orientation: portrait) {
+      .split { grid-template-columns: 1fr; grid-template-rows: auto 1fr; }
+      .split__photo { height: 44vh; height: 44svh; min-height: 260px; }
+      .split__photo img { object-position: 50% 40%; }
+      .split__text { padding: 36px var(--pad-x) 60px; justify-content: flex-start; }
+    }
+
+    /* ═══ 4-6 · PLANES ═════════════════════════════ */
+    .plan .wrap {
+      display: grid; grid-template-columns: 0.95fr 1.05fr;
+      gap: clamp(40px, 6vw, 110px); align-items: center;
+    }
+    .plan--esencial { background: var(--navy); }
+    .plan--completo { background: radial-gradient(ellipse at 20% 40%, #334052 0%, var(--navy-light) 45%, var(--navy) 100%); }
+    .plan--premium  { background: radial-gradient(ellipse at 85% 20%, #2a3545 0%, var(--navy-dark) 60%); }
+
+    .plan__meta {
+      display: flex; align-items: center; gap: 14px; flex-wrap: wrap;
+      font-size: 12px; font-weight: 500; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--gold);
+    }
+    .plan__meta .line { width: 36px; height: 1px; background: currentColor; }
+    .pill {
+      background: var(--gold); color: var(--navy-dark);
+      font-size: 10.5px; font-weight: 600; letter-spacing: 0.16em;
+      padding: 5px 12px; border-radius: 40px;
+    }
+    .plan h2 { font-size: clamp(58px, 7.4vw, 120px); margin-top: 16px; }
+    .plan__tagline {
+      margin-top: 10px;
+      font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+      font-size: clamp(21px, 1.9vw, 28px); line-height: 1.3;
+      color: rgba(240,240,232,0.82);
+    }
+    .plan .price { align-items: flex-start; margin-top: 30px; }
+    .plan .price strong { font-size: clamp(58px, 5.6vw, 86px); }
+    .plan .price small { font-size: 13px; color: var(--muted); letter-spacing: 0.04em; margin-top: 6px; }
+
+    .plan__list { list-style: none; border-top: 1px solid var(--rule); }
+    .plan__list li {
+      display: grid; grid-template-columns: 22px 1fr; column-gap: 6px;
+      padding: clamp(14px, 2.2vh, 21px) 0;
+      border-bottom: 1px solid var(--rule);
+      font-size: clamp(16px, 1.35vw, 20px); line-height: 1.45;
+    }
+    .plan__list li::before {
+      content: ''; width: 7px; height: 7px; margin-top: 0.56em;
+      background: var(--gold); transform: rotate(45deg);
+    }
+    .plan__list small {
+      display: block; font-size: 0.8em; color: var(--muted); margin-top: 2px;
+    }
+    .plan__list li.all {
+      font-family: 'Cormorant Garamond', serif; font-style: italic; font-weight: 500;
+      font-size: clamp(20px, 1.7vw, 25px); color: var(--gold-light);
+    }
+    .plan__list li.all::before {
+      content: '+'; width: auto; height: auto; margin-top: 0;
+      background: none; transform: none;
+      font-family: 'Outfit', sans-serif; font-style: normal; font-weight: 400;
+      color: var(--gold); line-height: 1.3;
+    }
+    .js .plan__list li {
+      opacity: 0; transform: translateX(18px);
+      transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
+      transition-delay: calc(var(--k, 0) * 0.09s + 0.45s);
+    }
+    .js .is-in .plan__list li { opacity: 1; transform: none; }
+
+    @media (max-width: 899px) {
+      .plan .wrap { grid-template-columns: 1fr; gap: 34px; }
+      .plan .price { margin-top: 20px; }
+    }
+    @media (max-width: 760px) {
+      .wrap { padding-top: 84px; padding-bottom: 48px; }
+      .plan .wrap { gap: 26px; }
+      .plan h2 { font-size: 56px; margin-top: 10px; }
+      .plan .price { margin-top: 14px; }
+      .plan .price strong { font-size: 52px; }
+      .plan__list li { padding: 12px 0; font-size: 16px; }
+      .plan__list li.all { font-size: 20px; }
+    }
+
+    /* ═══ 7 · CIERRE ═══════════════════════════════ */
+    .closing { background: var(--navy); align-items: flex-end; }
+    .closing .photo-bg img { object-position: 50% 42%; }
+    .closing .shade {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(180deg, rgba(26,35,46,0.35) 0%, rgba(26,35,46,0) 18%),
+        linear-gradient(270deg, rgba(26,35,46,0.62) 0%, rgba(26,35,46,0.2) 38%, rgba(26,35,46,0) 58%),
+        linear-gradient(0deg, rgba(26,35,46,0.6) 0%, rgba(26,35,46,0) 42%);
+    }
+    .closing__content {
+      position: relative; z-index: 2;
+      margin: 0 var(--pad-x) clamp(56px, 11vh, 120px) auto;
+      max-width: 470px;
+    }
+    .closing h2 { font-size: clamp(40px, 4.4vw, 68px); text-shadow: 0 2px 24px rgba(0,0,0,0.25); }
+    .closing p.lead {
+      margin-top: 18px; font-size: clamp(16px, 1.25vw, 19px); line-height: 1.7;
+      color: rgba(255,255,255,0.9);
+    }
+    .sign {
+      margin-top: 30px; padding-top: 22px;
+      border-top: 1px solid rgba(255,255,255,0.22);
+    }
+    .sign__logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px; font-weight: 600; letter-spacing: 0.06em;
+    }
+    .sign__logo span { color: var(--gold); }
+    .sign__contact { margin-top: 6px; font-size: 14px; color: rgba(255,255,255,0.78); }
+    .sign__contact a { color: inherit; text-decoration: none; border-bottom: 1px solid rgba(226,180,76,0.5); }
+    .sign__contact .dot { margin: 0 8px; color: var(--gold); }
+
+    @media (orientation: portrait), (max-width: 760px) {
+      .closing { flex-direction: column; align-items: stretch; }
+      .closing .photo-bg { position: relative; height: 56vh; height: 56svh; min-height: 300px; }
+      .closing .photo-bg img { object-position: 45% 45%; }
+      .closing .shade {
+        background:
+          linear-gradient(180deg, rgba(26,35,46,0.4) 0%, rgba(26,35,46,0) 22%),
+          linear-gradient(0deg, var(--navy) 0%, rgba(34,45,57,0) 38%);
+      }
+      .closing__content {
+        flex: 1; display: flex; flex-direction: column; justify-content: center;
+        margin: -48px var(--pad-x) 0;
+        padding-bottom: calc(40px + env(safe-area-inset-bottom));
+        max-width: 560px;
+      }
+    }
+
+    /* ─── ACCESIBILIDAD ───────────────────────────── */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation: none !important;
+        transition-duration: 0.01ms !important;
+        transition-delay: 0s !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Barra fija: logo + número de diapositiva -->
+<header class="topbar">
+  <a class="logo" href="#portada" data-on="photo">Garavit<span>.</span>Studio</a>
+  <span class="counter" id="counter" data-on="photo" aria-hidden="true">01 / 07</span>
+</header>
+
+<main>
+
+  <!-- ═══ 1 · PORTADA ═══ -->
+  <section class="slide cover" id="portada" data-tone="photo" aria-label="Portada">
+    <picture class="photo-bg">
+      <source media="(orientation: portrait)" type="image/webp" srcset="/propuesta/img/portada-movil.webp">
+      <source media="(orientation: portrait)" srcset="/propuesta/img/portada-movil.jpg">
+      <source type="image/webp" srcset="/propuesta/img/portada.webp">
+      <img src="/propuesta/img/portada.jpg" alt="La pareja besándose junto al río Tormes, con la Catedral de Salamanca al fondo" fetchpriority="high">
+    </picture>
+    <div class="shade"></div>
+
+    <div class="cover__content">
+      <p class="eyebrow rv"><span class="line"></span>Propuesta de vídeo de boda</p>
+      <h1 class="rv" style="--d:1">Vuestra boda,<br><em>en película.</em></h1>
+      <p class="cover__sub rv" style="--d:2">Una propuesta hecha a medida para vosotros.</p>
+    </div>
+
+    <button class="next-hint" type="button" data-next aria-label="Ir a la siguiente diapositiva">
+      Desliza
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+        <path d="M4 7l5 5 5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+  </section>
+
+  <!-- ═══ 2 · LOS TRES PLANES (solo precios) ═══ -->
+  <section class="slide prices" id="planes" data-tone="dark" aria-label="Los tres planes">
+    <div class="lines" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="wrap">
+      <p class="eyebrow rv"><span class="line"></span>Nuestra propuesta<span class="line"></span></p>
+      <h2 class="rv" style="--d:1">Tres formas de <em>contar vuestro día</em></h2>
+
+      <div class="price-grid">
+        <article class="price-card" style="--i:0">
+          <h3>Esencial</h3>
+          <p class="price"><s><span class="sr-only">Precio habitual: </span>750&nbsp;€</s><strong>630&nbsp;€</strong></p>
+        </article>
+
+        <article class="price-card price-card--featured" style="--i:1">
+          <span class="tag">Recomendado</span>
+          <h3>Completo</h3>
+          <p class="price"><s><span class="sr-only">Precio habitual: </span>890&nbsp;€</s><strong>760&nbsp;€</strong></p>
+        </article>
+
+        <article class="price-card" style="--i:2">
+          <h3>Premium</h3>
+          <p class="price"><s><span class="sr-only">Precio habitual: </span>1.150&nbsp;€</s><strong>980&nbsp;€</strong></p>
+        </article>
+      </div>
+
+      <p class="price-note">Precio especial para vosotros · IVA incluido</p>
+    </div>
+  </section>
+
+  <!-- ═══ 3 · SIN COMPROMISO ═══ -->
+  <section class="slide calm" id="sin-compromiso" data-tone="light" aria-label="Sin compromiso">
+    <div class="split">
+      <figure class="split__photo" data-tone="photo">
+        <picture>
+          <source type="image/webp" srcset="/propuesta/img/pareja.webp">
+          <img src="/propuesta/img/pareja.jpg" alt="La pareja sonriendo, frente con frente, con un ramo de rosas" loading="lazy" decoding="async">
+        </picture>
+      </figure>
+
+      <div class="split__text">
+        <p class="eyebrow rv"><span class="line"></span>Antes de seguir</p>
+        <h2 class="rv" style="--d:1">Sin ningún <em>compromiso</em></h2>
+        <p class="rv" style="--d:2">Esto es solo una propuesta para que veáis lo que podemos hacer por vosotros el día de vuestra boda.</p>
+        <p class="rv" style="--d:3">Si los precios no encajan con lo que buscáis, no pasa absolutamente nada. Lo entendemos perfectamente y no hay ningún problema.</p>
+
+        <div class="gift rv" style="--d:4">
+          <div class="gift__icon" aria-hidden="true">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <rect x="3.5" y="8.5" width="17" height="4" rx="1" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M5 12.5v7a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-7M12 8.5v12" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M12 8.5c-1.2-2.8-4.6-4.1-5.6-2.2-.8 1.6 1.3 2.2 5.6 2.2Zm0 0c1.2-2.8 4.6-4.1 5.6-2.2.8 1.6-1.3 2.2-5.6 2.2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <h3>El save the date es nuestro regalo</h3>
+            <p>El save the date y su reel son un regalo nuestro, y no dependen de que trabajemos juntos en la boda. Son vuestros, pase lo que pase.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ 4 · PLAN ESENCIAL ═══ -->
+  <section class="slide plan plan--esencial" id="esencial" data-tone="dark" aria-label="Plan Esencial">
+    <div class="lines" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="wrap">
+      <div class="plan__head">
+        <p class="plan__meta rv"><span class="line"></span>Plan 01</p>
+        <h2 class="rv" style="--d:1">Esencial</h2>
+        <p class="plan__tagline rv" style="--d:2">Lo imprescindible para revivir vuestro día.</p>
+        <p class="price rv" style="--d:3"><s><span class="sr-only">Precio habitual: </span>750&nbsp;€</s><strong>630&nbsp;€</strong><small>Precio especial · IVA incluido</small></p>
+      </div>
+      <ul class="plan__list">
+        <li>Grabación de todo el día, desde la ceremonia hasta la fiesta</li>
+        <li>Reunión previa para conocer el guion del día</li>
+        <li><span>Película completa<small>20–30 minutos</small></span></li>
+        <li><span>Tráiler<small>2–3 minutos</small></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 5 · PLAN COMPLETO ═══ -->
+  <section class="slide plan plan--completo" id="completo" data-tone="dark" aria-label="Plan Completo">
+    <div class="lines" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="wrap">
+      <div class="plan__head">
+        <p class="plan__meta rv"><span class="line"></span>Plan 02 <span class="pill">Recomendado</span></p>
+        <h2 class="rv" style="--d:1">Completo</h2>
+        <p class="plan__tagline rv" style="--d:2">Más momentos, y más formas de compartirlos.</p>
+        <p class="price rv" style="--d:3"><s><span class="sr-only">Precio habitual: </span>890&nbsp;€</s><strong>760&nbsp;€</strong><small>Precio especial · IVA incluido</small></p>
+      </div>
+      <ul class="plan__list">
+        <li class="all">Todo lo del plan Esencial</li>
+        <li>Preparativos de los dos novios</li>
+        <li>3 reels</li>
+        <li>Ceremonia y discursos íntegros, sin cortar</li>
+        <li><span>Vídeo con los mensajes de los invitados<small>unos 2 minutos</small></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 6 · PLAN PREMIUM ═══ -->
+  <section class="slide plan plan--premium" id="premium" data-tone="dark" aria-label="Plan Premium">
+    <div class="lines" aria-hidden="true"><i></i><i></i><i></i></div>
+    <div class="wrap">
+      <div class="plan__head">
+        <p class="plan__meta rv"><span class="line"></span>Plan 03</p>
+        <h2 class="rv" style="--d:1">Premium</h2>
+        <p class="plan__tagline rv" style="--d:2">Vuestra historia, de principio a fin.</p>
+        <p class="price rv" style="--d:3"><s><span class="sr-only">Precio habitual: </span>1.150&nbsp;€</s><strong>980&nbsp;€</strong><small>Precio especial · IVA incluido</small></p>
+      </div>
+      <ul class="plan__list">
+        <li class="all">Todo lo del plan Completo</li>
+        <li>5 reels en lugar de 3</li>
+        <li>Entrevista previa a los novios, intercalada en la película</li>
+        <li>Clips sueltos de los momentos clave</li>
+        <li>Stories en directo durante la boda</li>
+        <li><span>Brutos de todo el día<small>todo el material grabado, sin editar</small></span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ═══ 7 · CIERRE ═══ -->
+  <section class="slide closing" id="gracias" data-tone="dark" aria-label="Gracias">
+    <figure class="photo-bg" data-tone="photo">
+      <picture>
+        <source type="image/webp" srcset="/propuesta/img/cierre.webp">
+        <img src="/propuesta/img/cierre.jpg" alt="La pareja de espaldas, frente al río Tormes y la Catedral de Salamanca" loading="lazy" decoding="async">
+      </picture>
+      <div class="shade"></div>
+    </figure>
+
+    <div class="closing__content">
+      <h2 class="rv">Gracias por <em>pensar en nosotros</em></h2>
+      <p class="lead rv" style="--d:1">Pensadlo con calma, y cualquier duda que tengáis, nos la contáis.</p>
+      <div class="sign rv" style="--d:2">
+        <p class="sign__logo">Garavit<span>.</span>Studio</p>
+        <p class="sign__contact">
+          <a href="mailto:hola@garavitstudio.com">hola@garavitstudio.com</a><span class="dot">·</span><a href="tel:+34643981922">643 98 19 22</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+(function () {
+  var slides  = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var counter = document.getElementById('counter');
+  var logo    = document.querySelector('.topbar .logo');
+  var total   = slides.length;
+  var current = 0;
+  var reduce  = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function pad(n) { return (n < 10 ? '0' : '') + n; }
+
+  /* Escalonado de las listas de cada plan */
+  document.querySelectorAll('.plan__list').forEach(function (list) {
+    Array.prototype.forEach.call(list.children, function (li, k) {
+      li.style.setProperty('--k', k);
+    });
+  });
+
+  /* Diapositiva activa = la que cruza el centro de la pantalla */
+  function setActive(i) {
+    current = i;
+    counter.textContent = pad(i + 1) + ' / ' + pad(total);
+    slides[i].classList.add('is-in');
+  }
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) setActive(slides.indexOf(e.target));
+      });
+    }, { rootMargin: '-50% 0px -50% 0px', threshold: 0 });
+    slides.forEach(function (s) { io.observe(s); });
+  } else {
+    slides.forEach(function (s) { s.classList.add('is-in'); });
+  }
+
+  /* Color del logo y del contador según lo que haya debajo */
+  function toneAt(x, y) {
+    var els = document.elementsFromPoint ? document.elementsFromPoint(x, y) : [];
+    for (var i = 0; i < els.length; i++) {
+      if (els[i].closest('.topbar')) continue;
+      var t = els[i].closest('[data-tone]');
+      if (t) return t.getAttribute('data-tone');
+    }
+    return 'dark';
+  }
+  function paintTopbar() {
+    [logo, counter].forEach(function (el) {
+      var r = el.getBoundingClientRect();
+      el.setAttribute('data-on', toneAt(r.left + r.width / 2, r.top + r.height / 2));
+    });
+  }
+  var ticking = false;
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function () { paintTopbar(); ticking = false; });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  window.addEventListener('load', paintTopbar);
+  paintTopbar();
+
+  /* Navegación con teclado o mando de presentaciones */
+  function go(i) {
+    i = Math.max(0, Math.min(total - 1, i));
+    slides[i].scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+  }
+  function next() {
+    var r = slides[current].getBoundingClientRect();
+    if (r.bottom > window.innerHeight + 8) {
+      window.scrollBy({ top: Math.min(r.bottom - window.innerHeight, window.innerHeight * 0.85), behavior: reduce ? 'auto' : 'smooth' });
+    } else { go(current + 1); }
+  }
+  function prev() {
+    var r = slides[current].getBoundingClientRect();
+    if (r.top < -8) {
+      window.scrollBy({ top: Math.max(r.top, -window.innerHeight * 0.85), behavior: reduce ? 'auto' : 'smooth' });
+    } else { go(current - 1); }
+  }
+  document.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var k = e.key;
+    if (k === 'ArrowDown' || k === 'ArrowRight' || k === 'PageDown' || (k === ' ' && !e.shiftKey)) { e.preventDefault(); next(); }
+    else if (k === 'ArrowUp' || k === 'ArrowLeft' || k === 'PageUp' || (k === ' ' && e.shiftKey)) { e.preventDefault(); prev(); }
+    else if (k === 'Home') { e.preventDefault(); go(0); }
+    else if (k === 'End') { e.preventDefault(); go(total - 1); }
+  });
+  document.querySelectorAll('[data-next]').forEach(function (b) {
+    b.addEventListener('click', function () { go(1); });
+  });
+})();
+</script>
+</body>
+</html>

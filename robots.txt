@@ -4,5 +4,6 @@ Disallow: /aviso-legal.html
 Disallow: /politica-privacidad.html
 Disallow: /politica-cookies.html
 Disallow: /web-antigua.html
+Disallow: /propuesta/
 
 Sitemap: https://garavitstudio.com/sitemap.xml
